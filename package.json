@@ -1,0 +1,11 @@
+{
+  "name": "quick-type",
+  "private": true,
+  "packageManager": "pnpm@10.15.0",
+  "scripts": {
+    "dev": "pnpm --parallel --filter quick-type-frontend --filter quick-type-backend dev",
+    "dev:front": "pnpm --filter quick-type-frontend dev",
+    "dev:backend": "pnpm --filter quick-type-backend dev",
+    "build": "pnpm --filter quick-type-backend build && pnpm --filter quick-type-frontend build"
+  }
+}

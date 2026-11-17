@@ -1,0 +1,8 @@
+**/.git
+**/node_modules
+**/dist
+**/.env
+**/.env.*
+**/logs
+**/*.md
+backend/quick-type-backend-dist.tar.gz

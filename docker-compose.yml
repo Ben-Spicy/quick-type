@@ -1,0 +1,42 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      NODE_ENV: production
+      PORT: 8787
+      HOST: 0.0.0.0
+      HOME: /home/node
+    volumes:
+      - type-data:/home/node/quick-type-types
+    expose:
+      - "8787"
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:8787/health').then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+  web:
+    build:
+      context: .
+      dockerfile: front/Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-https://1996tsk.com}
+        VITE_SITE_URL: ${VITE_SITE_URL:-https://1996tsk.com/quick-type}
+    ports:
+      - "80:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  type-data:
