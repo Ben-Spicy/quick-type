@@ -11,7 +11,7 @@ import {
  * 处理与后端的通信
  */
 export class ApiService {
-  private static readonly BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8787';
+  private static readonly BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:8787').replace(/\/$/, '');
 
   /**
    * 生成 TypeScript 类型定义

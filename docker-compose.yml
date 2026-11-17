@@ -29,10 +29,10 @@ services:
       context: .
       dockerfile: front/Dockerfile
       args:
-        VITE_API_URL: ${VITE_API_URL:-https://1996tsk.com}
-        VITE_SITE_URL: ${VITE_SITE_URL:-https://1996tsk.com/quick-type}
+        VITE_API_URL: ${VITE_API_URL:-/quick-type}
+        VITE_SITE_URL: ${VITE_SITE_URL:-https://1996tsk.top/quick-type}
     ports:
-      - "80:80"
+      - "8080:80"
     depends_on:
       api:
         condition: service_healthy

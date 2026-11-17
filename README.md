@@ -53,7 +53,7 @@ pnpm dev:front
 
 ```bash
 VITE_API_URL=http://localhost:8787
-VITE_SITE_URL=https://1996tsk.com/quick-type
+VITE_SITE_URL=https://1996tsk.top/quick-type
 ```
 
 `VITE_API_URL` 是浏览器请求后端的地址。`VITE_SITE_URL` 用于页面的 canonical 和分享信息，可以写域名，也可以写已经带 `/quick-type` 的页面地址。
@@ -66,16 +66,11 @@ VITE_SITE_URL=https://1996tsk.com/quick-type
 docker compose up -d --build
 ```
 
-- 页面：容器的 `80` 端口，路径 `/quick-type/`
-- 接口：Nginx 把 `/api` 和 `/health` 转到后端
-- 构建参数默认是 `VITE_API_URL=https://1996tsk.com`、`VITE_SITE_URL=https://1996tsk.com/quick-type`。这两个值会写进前端构建结果
+- 页面：宿主机 `8080` 端口，路径 `/quick-type/`。容器内的 Nginx 仍监听 `80`
+- 接口：页面请求当前域名下的 `/quick-type/api`。容器里的 Nginx 把它转到后端。服务器前面的 HTTPS 代理也要把 `/quick-type/` 转到 `8080`
 - 保存的类型文件位于数据卷中的 `/home/node/quick-type-types`
 
-本机打开容器页面时，页面里的接口仍会请求 `https://1996tsk.com`。要让浏览器请求本机 Nginx，构建前设置：
-
-```bash
-VITE_API_URL=http://localhost docker compose up -d --build
-```
+`VITE_API_URL` 会写进前端构建结果。默认是 `/quick-type`，这样页面在哪个域名打开，接口就打到哪个域名。改过这个值之后需要重新构建 `web` 镜像。
 
 ## 使用
 

@@ -12,8 +12,8 @@ RUN pnpm install --frozen-lockfile --filter quick-type-frontend...
 
 COPY front front
 
-ARG VITE_API_URL=https://1996tsk.com
-ARG VITE_SITE_URL=https://1996tsk.com/quick-type
+ARG VITE_API_URL=/quick-type
+ARG VITE_SITE_URL=https://1996tsk.top/quick-type
 ENV VITE_API_URL=$VITE_API_URL \
   VITE_SITE_URL=$VITE_SITE_URL
 
